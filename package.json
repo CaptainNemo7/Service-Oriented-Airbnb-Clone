@@ -1,0 +1,26 @@
+{
+  "name": "hrsf84-thesis",
+  "version": "1.0.0",
+  "description": "The project description",
+  "main": ".eslintrc.js",
+  "dependencies": {
+    "pg": "^7.4.0",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.28.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CaptainNemo7/hrsf84-thesis.git"
+  },
+  "keywords": [],
+  "author": "carter",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CaptainNemo7/hrsf84-thesis/issues"
+  },
+  "homepage": "https://github.com/CaptainNemo7/hrsf84-thesis#readme"
+}
