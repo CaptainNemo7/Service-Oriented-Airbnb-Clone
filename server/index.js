@@ -3,6 +3,8 @@ const apm = require('elastic-apm-node').start({
   appName: 'thesis'
   //custom APM Server URL (default: http://localhost:8200)
 })
+const http = require('http');
+const querystring = require('querystring');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
@@ -11,8 +13,7 @@ const Moment = require('moment');
 
 
 let urlencodedParser = bodyParser.urlencoded({ extended: false })
-let startTime = Moment();
-let experienceId = 5000001;
+let experienceId = 6000001;
 let listingId = 10000001;
 
 const Sequelize = require('sequelize');
@@ -76,8 +77,30 @@ app.post('/delete', urlencodedParser, (req, res) => {
 	  	console.log(err);
 		});
 	});
-})
+	let startTime = Moment();
+	let updatesToChris = {
+		host: //need to fill in,
+		port: // need to fill in,
+		path: '/deleted',
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+			'Content-Length': Buffer.byteLength(data)
+		}
+	};
+	let data = {req.body.itemid, req.body.itemtype, req.body.hostid, startTime.format()}
+	data.querystring.stringify();
+	let info = http.request(options, (res)=> {
+		info.setEncoding('utf8');
+		info.on('data'., (chunk) => {
+			console.log('body: ', chunk);
+		});
+	});
+	info.write(data);
+	info.end();
 
+})
+// for chris - itemid, type, hostid, time updated/destroyed
 app.post('/create', urlencodedParser, (req, res) => {
 	if ( !req.body ) {
 		return res.sendStatus(400);
@@ -95,12 +118,11 @@ app.post('/create', urlencodedParser, (req, res) => {
 		usedId = experienceId;
 		experienceId += 1;
 	}
-	const endTime = Moment(); 
-	// set time up for created at and upodated at;
-	console.log('tiome ',endTime.diff(startTime))
+	let startTime = Moment();
+
 
 	sequelize.authenticate().then(() => {
-		sequelize.query(`INSERT INTO ${type} (itemid, location, itemtype, hostid, createdat, updatedat) VALUES (${usedId},'${req.body.location}', '${req.body.itemtype}', ${req.body.hostid}, '2017-12-14 16:31:11.109-08', '2017-12-14 16:31:11.109-08')`)
+		sequelize.query(`INSERT INTO ${type} (itemid, location, itemtype, hostid, createdat, updatedat) VALUES (${usedId},'${req.body.location}', '${req.body.itemtype}', ${req.body.hostid}, '${startTime.format()}', '${startTime.format()}')`)
 		.then(() => {
 			console.log('updated') // 1
 			
@@ -109,7 +131,27 @@ app.post('/create', urlencodedParser, (req, res) => {
 	  	console.log(err);
 		});
 	});
-	res.send(200)
+
+	let updatesToChris = {
+		host: //need to fill in,
+		port: // need to fill in,
+		path: '/created',
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+			'Content-Length': Buffer.byteLength(data)
+		}
+	};
+	let data = {usedId, req.body.itemtype, req.body.hostid, startTime.format()}
+	data.querystring.stringify();
+	let info = http.request(options, (res)=> {
+		info.setEncoding('utf8');
+		info.on('data'., (chunk) => {
+			console.log('body: ', chunk);
+		});
+	});
+	info.write(data);
+	info.end();
 })
 
 
