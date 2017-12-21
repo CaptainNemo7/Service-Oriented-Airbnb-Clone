@@ -28,9 +28,6 @@ const sequelize = new Sequelize('testdb', '', '', {
 });
 
 
-
-
-// location = \'' + req.body + '\''
 // Por Tomás
 
 app.get('/search/:location', function(req, res) {
@@ -79,8 +76,8 @@ app.post('/delete', urlencodedParser, (req, res) => {
 	});
 	let startTime = Moment();
 	let updatesToChris = {
-		host: //need to fill in,
-		port: // need to fill in,
+		// host: //need to fill in,
+		// port: // need to fill in,
 		path: '/deleted',
 		method: 'POST',
 		headers: {
@@ -133,8 +130,8 @@ app.post('/create', urlencodedParser, (req, res) => {
 	});
 
 	let updatesToChris = {
-		host: //need to fill in,
-		port: // need to fill in,
+		// host: //need to fill in,
+		// port: // need to fill in,
 		path: '/created',
 		method: 'POST',
 		headers: {
