@@ -26,7 +26,7 @@ const sequelize = new Sequelize('testdb', '', '', {
     idle: 10000
   }
 });
-
+//added this here for it
 
 
 
