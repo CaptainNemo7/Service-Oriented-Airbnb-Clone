@@ -28,19 +28,16 @@ const sequelize = new Sequelize('testdb', '', '', {
 });
 //added this here for it
 
-
-
-// location = \'' + req.body + '\''
 // Por Tomás
 
 app.get('/search/:location', function(req, res) {
 	console.log('recieved and running')
 	console.log(req.params.location)
 	sequelize.authenticate().then(() => {
-		sequelize.query(`SELECT * from experiences WHERE location = '${req.params.location}' LIMIT 5 `)
+		sequelize.query(`SELECT * from experiences WHERE location = '${req.params.location}' LIMIT 200 `)
 		.then((listings) => {
 			
-			sequelize.query(`SELECT * from listings WHERE location = '${req.params.location}' LIMIT 5 `)
+			sequelize.query(`SELECT * from listings WHERE location = '${req.params.location}' LIMIT 200 `)
 				.then((experiences) => {
 				console.log("Success!");
 				console.log(listings[0])
@@ -79,8 +76,8 @@ app.post('/delete', urlencodedParser, (req, res) => {
 	});
 	let startTime = Moment();
 	let updatesToChris = {
-		host: //need to fill in,
-		port: // need to fill in,
+		// host: //need to fill in,
+		// port: // need to fill in,
 		path: '/deleted',
 		method: 'POST',
 		headers: {
@@ -105,7 +102,7 @@ app.post('/create', urlencodedParser, (req, res) => {
 	if ( !req.body ) {
 		return res.sendStatus(400);
 	}
-	console.log('hey received! ',req.body);
+	// console.log('hey received! ',req.body);
 
 	let type = '';
 	let usedId = '';
@@ -133,8 +130,8 @@ app.post('/create', urlencodedParser, (req, res) => {
 	});
 
 	let updatesToChris = {
-		host: //need to fill in,
-		port: // need to fill in,
+		// host: //need to fill in,
+		// port: // need to fill in,
 		path: '/created',
 		method: 'POST',
 		headers: {
