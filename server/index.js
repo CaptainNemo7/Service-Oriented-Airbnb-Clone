@@ -149,13 +149,49 @@ app.post('/create', urlencodedParser, (req, res) => {
 	});
 	info.write(data);
 	info.end();
+
+	let updatesToJoe = {
+		// host: //need to fill in,
+		// port: // need to fill in,
+		path: '/createdBooking',
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+			'Content-Length': Buffer.byteLength(data)
+		}
+	};
+	let data = {usedId, req.body.itemtype, req.body.hostid, startTime.format()}
+	data.querystring.stringify();
+	let info = http.request(options, (res)=> {
+		info.setEncoding('utf8');
+		info.on('data'., (chunk) => {
+			console.log('body: ', chunk);
+		});
+	});
+	info.write(data);
+	info.end();
 })
 
 
 //For Joe
-app.post('/books', urlencodedParser, (req, res) => {
-
+app.post('/originalBooks', urlencodedParser, (req, res) => {
+	sequelize.authenticate().then(() => {
+		sequelize.query(`SELECT itemid, itemtype, hostid FROM listings LIMIT 100;`)
+		.then((listings) => {
+			
+			sequelize.query(`SELECT itemid, itemtype, hostid FROM experiences LIMIT 100;`)
+				.then((experiences) => {
+				console.log("Success!");
+				let holder = {'listings': listings[0], 'experiences':experiences[0]}
+				res.send(holder)
+			})
+		})
+	  
+	}).catch((err) => {
+	  console.log(err);
+	});	
 })
+
 
 // app.get('/search', function (req, res) {
 // 	console.log('hey')
