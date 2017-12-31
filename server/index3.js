@@ -32,7 +32,7 @@ const sequelize = new Sequelize('testdb', '', '', {
 
 app.get('/search/:location', function(req, res) {
 	console.log('recieved and running')
-	console.log('server 3000')
+	console.log('server 3002')
 	sequelize.authenticate().then(() => {
 		sequelize.query(`SELECT * from experiences WHERE location = '${req.params.location}' LIMIT 200 `)
 		.then((listings) => {
@@ -224,6 +224,6 @@ app.post('/originalBooks', urlencodedParser, (req, res) => {
 // any errors caught by Express can be logged by the agent as well
 app.use(apm.middleware.express())
 
-app.listen(3000)
-console.log('listening on port 3000!')
+app.listen(3002)
+console.log('listening on port 3002!')
 

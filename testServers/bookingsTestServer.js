@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 
 let urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-app.set('port', 8081);
+app.set('port', 8082);
 
 app.get('/', (req, res) => {
 	res.send('hello bookings')
