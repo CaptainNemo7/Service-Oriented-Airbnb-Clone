@@ -34,10 +34,10 @@ app.get('/search/:location', function(req, res) {
 	console.log('recieved and running')
 	console.log('server 3000')
 	sequelize.authenticate().then(() => {
-		sequelize.query(`SELECT * from experiences WHERE location = '${req.params.location}' LIMIT 200 `)
+		sequelize.query(`SELECT * from experiences WHERE location = '${req.params.location}' LIMIT 20 `)
 		.then((listings) => {
 			
-			sequelize.query(`SELECT * from listings WHERE location = '${req.params.location}' LIMIT 200 `)
+			sequelize.query(`SELECT * from listings WHERE location = '${req.params.location}' LIMIT 20 `)
 				.then((experiences) => {
 				console.log("Success!");
 				console.log(listings[0])
