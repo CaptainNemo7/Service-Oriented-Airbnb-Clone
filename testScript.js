@@ -22,7 +22,7 @@ const test = () => {
 			test()
 			
 
-		}, 2)
+		}, 200)
 		// test()
 	})
 	.catch((err) => {
